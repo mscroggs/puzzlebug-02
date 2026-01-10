@@ -1,0 +1,372 @@
+\documentclass[a4paper,landscape]{article}
+\usepackage{tikz}
+\usetikzlibrary{3d}
+\usepackage{amsmath}
+\usepackage[math-style=ISO,bold-style=ISO,mathrm=sym]{unicode-math}
+\usepackage[top=0mm,bottom=0mm,left=0mm,right=0mm]{geometry}
+\usepackage{ifthen}
+\usepackage{pgfplots}
+\usepackage{ragged2e}
+\usepackage{tabularx}
+\input binhex
+\usepackage{xstring}
+
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Bubble Sans}
+\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+
+\newcommand{\pagenum}[1]{
+\begin{scope}[shift={(3.7125,0.8)}]
+\draw[line width=1pt,line join=round,rounded corners=1mm] (-0.25,-0.25) rectangle (0.25,0.25);
+\ifthenelse{\equal{#1}{1}}{
+\fill[black] (0,0) circle (1.8pt);
+}{}
+\ifthenelse{\equal{#1}{2}}{
+\fill[black] (0.1,0.1) circle (1.8pt);
+\fill[black] (-0.1,-0.1) circle (1.8pt);
+}{}
+\ifthenelse{\equal{#1}{3}}{
+\fill[black] (0,0) circle (1.8pt);
+\fill[black] (0.125,0.125) circle (1.8pt);
+\fill[black] (-0.125,-0.125) circle (1.8pt);
+}{}
+\ifthenelse{\equal{#1}{4}}{
+\fill[black] (0.1,0.1) circle (1.8pt);
+\fill[black] (0.1,-0.1) circle (1.8pt);
+\fill[black] (-0.1,0.1) circle (1.8pt);
+\fill[black] (-0.1,-0.1) circle (1.8pt);
+}{}
+\ifthenelse{\equal{#1}{5}}{
+\fill[black] (0,0) circle (1.8pt);
+\fill[black] (0.125,0.125) circle (1.8pt);
+\fill[black] (0.125,-0.125) circle (1.8pt);
+\fill[black] (-0.125,0.125) circle (1.8pt);
+\fill[black] (-0.125,-0.125) circle (1.8pt);
+}{}
+\ifthenelse{\equal{#1}{6}}{
+\fill[black] (0.1,-0.145) circle (1.8pt);
+\fill[black] (0.1,0) circle (1.8pt);
+\fill[black] (0.1,0.145) circle (1.8pt);
+\fill[black] (-0.1,-0.145) circle (1.8pt);
+\fill[black] (-0.1,0) circle (1.8pt);
+\fill[black] (-0.1,0.145) circle (1.8pt);
+}{}
+\end{scope}
+}
+
+% PUZZLEBUG NUMBERING SYSTEM v1
+% P U Z Z L E B U G
+%  A B B C D E E E
+% A is version number this numbering system (currently 1)
+% BB is issue number (hex)
+% C is edit number (hex, 0 for draft, 1 for first release, 2 for first release after corrections, etc)
+% D is 0 for test print, 1 for print, 2 for pdf
+% if D==0:
+%   EEE is 123
+% if D==1:
+%   E,EE is print run number and size of print run (hex)
+% if D==2:
+%   EEE is PDF
+%% inputs:
+%%  NUMBERING VERSION
+%%  ISSUE NuMBER
+%%  EDIT NUMBER
+%%  TYPE (0=test, 1=print, 2=pdf)
+%%  if TYPE==1 PRINT RUN NUMBER else <IGNORED>
+%%  if TYPE==1 PRINT RUN SIZE else <IGNORED>
+\newcommand{\bugcode}[6]{P\StrChar{\nhex{1}{#1}}{1}U\StrChar{\nhex{2}{#2}}{1}Z\StrChar{\nhex{2}{#2}}{2}Z\StrChar{\nhex{1}{#3}}{1}L#4E\ifthenelse{\equal{#4}{0}}{1}{}\ifthenelse{\equal{#4}{1}}{\StrChar{\nhex{1}{#5}}{1}}{}\ifthenelse{\equal{#4}{2}}{P}{}B\ifthenelse{\equal{#4}{0}}{2}{}\ifthenelse{\equal{#4}{1}}{\StrChar{\nhex{2}{#6}}{1}}{}\ifthenelse{\equal{#4}{2}}{D}{}U\ifthenelse{\equal{#4}{0}}{3}{}\ifthenelse{\equal{#4}{1}}{\StrChar{\nhex{2}{#6}}{2}}{}\ifthenelse{\equal{#4}{2}}{F}{}G}
+
+\begin{document}
+\begin{center}
+\begin{tikzpicture}[line cap=round,line join=round]
+\clip (0,0) rectangle (29.7,21);
+\fill[white] (0,0) rectangle (29.7,21);
+
+
+%%%%%%%%%%%%%%%%%%%% FRONT COVER %%%%%%%%%%%%%%%%%%%%
+\begin{scope}[shift={(7.425,0)}]
+
+\clip (0,0) rectangle (7.425,10.5);
+
+\draw[line width=1pt,fill=white]
+    (3.1,7.4) -- (3.7,8.4) [rounded corners=5pt] -- (6.6,8.4) -- (6.6,9.6)
+    -- (0.824,9.6) -- (0.824,8.4) [rounded corners=0pt]
+    -- (3.5,8.4) -- cycle;
+\node at (3.7125,9) {\setmainfont[Scale=2.5]{Bubble Sans}Puzzlebug};
+\node[anchor=north east] at (6.6,8.4) {\setmainfont[Scale=1.3]{Bubble Sans}\#2};
+\node[anchor=east,rotate=90] at (6.8,9.7) {\setmainfont[Scale=0.5]{Bubble Sans}created by Matthew Scroggs};
+
+% start bug
+\begin{scope}[shift={(1,7)}]
+% legs
+\draw[line width=2pt] ({0.1*cos(10)},{-0.1*sin(10)}) arc (150:160:1.8) arc (20:170:0.03);
+\draw[line width=2pt] ({0.65*cos(10)},{-0.65*sin(10)}) arc (150:160:1.8) arc (20:170:0.03);
+\draw[line width=2pt] ({1.2*cos(10)},{-1.2*sin(10)}) arc (150:160:1.8) arc (20:170:0.03);
+\draw[line width=2pt] ({3.2-1.2*cos(10)},{-1.2*sin(10)}) arc (30:20:1.8) arc (170:20:0.03);
+% body
+\begin{scope}
+\clip (0,0) arc (180:-20:1) -- cycle;
+\fill[white] (-4,-4) rectangle (4,4);
+\draw[gray,line width=1pt,fill=gray]
+    (0.2,0.4) circle (0.2)
+    (0.8,0.2) ellipse (0.19 and 0.22)
+    (1,0.9) ellipse (0.2 and 0.17)
+    (1.85,0.8) circle (0.2)
+;
+\draw[line width=1pt] (1.6,0.03) arc (-20:90:0.8);
+\end{scope}
+\draw[line width=1pt] (0,0) arc (180:-20:1) -- cycle;
+% head
+\draw[line width=1pt,fill=black] (1.6,0.03) circle (0.5);
+\draw[line width=2pt]
+    (1.8,0.4) arc (156:152:3) arc (-125:120:0.05)
+    (1.4,0.4) arc (24:28:3) arc (-45:200:0.05);
+% eyes
+\draw[line width=1pt,fill=white] (1.83,-0.03) circle (0.2);
+\draw[line width=1pt,fill=white] (1.37,-0.03) circle (0.2);
+\begin{scope}[shift={(0.02,0)}]
+\draw[line width=1pt,fill=black] (1.83,-0.03) circle (0.1);
+\draw[line width=1pt,fill=black] (1.37,-0.03) circle (0.1);
+\end{scope}
+\draw[line width=2pt,black] (1.7,0.23) arc (110:70:0.32);
+\draw[line width=1.3pt,white] (1.7,0.23) arc (110:70:0.32);
+\draw[line width=2pt,black] (1.5,0.23) arc (70:110:0.32);
+\draw[line width=1.3pt,white] (1.5,0.23) arc (70:110:0.32);
+\end{scope}
+% end bug
+
+\node[anchor=south,text width=7cm] at (3.7125,0.5) {
+\null\hfill\scalebox{0.8}{
+\parbox{7.5cm}{\centering
+{\setmainfont[Scale=1.8]{Bangers}Featuring}
+
+\par\smallskip
+
+
+\mbox{names}
+\quad
+\mbox{of}
+\quad
+\mbox{puzzles}
+\quad
+\mbox{go}
+\quad
+\mbox{here}
+
+}}\hfill\null};
+
+
+\end{scope}
+
+%%%%%%%%%%%%%%%%%%%% PAGE ONE %%%%%%%%%%%%%%%%%%%%
+\begin{scope}[shift={(14.85,0)}]
+\pagenum{1}
+\end{scope}
+
+%%%%%%%%%%%%%%%%%%%% PAGE TWO %%%%%%%%%%%%%%%%%%%%
+\begin{scope}[shift={(22.275,0)}]
+\pagenum{2}
+\end{scope}
+
+%%%%%%%%%%%%%%%%%%%% PAGE THREE %%%%%%%%%%%%%%%%%%%%
+\begin{scope}[shift={(29.7,21)},rotate=180]
+\pagenum{3}
+\end{scope}
+
+%%%%%%%%%%%%%%%%%%%% PAGE FOUR %%%%%%%%%%%%%%%%%%%%
+\begin{scope}[shift={(22.275,21)},rotate=180]
+\pagenum{4}
+\end{scope}
+
+%%%%%%%%%%%%%%%%%%%% PAGE FIVE %%%%%%%%%%%%%%%%%%%%
+\begin{scope}[shift={(14.85,21)},rotate=180]
+\pagenum{5}
+\end{scope}
+
+%%%%%%%%%%%%%%%%%%%% PAGE SIX %%%%%%%%%%%%%%%%%%%%
+\begin{scope}[shift={(7.425,21)},rotate=180]
+\pagenum{6}
+\end{scope}
+
+%%%%%%%%%%%%%%%%%%%% BACK PAGE %%%%%%%%%%%%%%%%%%%%
+\begin{scope}
+
+\node[anchor=north,text width=7cm] at (3.7125,10.1) {
+\null\hfill\scalebox{0.8}{
+\parbox{7.5cm}{\centering
+\setmainfont{Bubble Sans}How to fold Puzzlebug}}\hfill\null};
+
+\draw[line width=1pt] (0.5125,9.5) rectangle +(2,-2);
+\node[anchor=west] at (0.5125,9.35) {\setmainfont[Scale=0.55]{Bubble Sans}fold};
+\draw[line width=1pt] (0.5125,9.2) -- +(0.8,0) -- +(0.8,0.3);
+\begin{scope}[shift={(0.6,7.72)},line width=1pt,line cap=join,line join=round,scale=0.32]
+\draw (0,0) rectangle ({4*sqrt(2)},4);
+\draw[dashed,line width=0.5pt] ({2*sqrt(2)},0) -- +(0,4);
+\draw[gray,->,shorten >=1mm, shorten <=1mm] ({4*sqrt(2)},4) arc (300:240:{2*sqrt(2)/sin(30)});
+\end{scope}
+
+\draw[line width=1pt] (2.7125,9.5) rectangle +(2,-2);
+\node[anchor=west] at (2.7125,9.35) {\setmainfont[Scale=0.55]{Bubble Sans}fold};
+\draw[line width=1pt] (2.7125,9.2) -- +(0.8,0) -- +(0.8,0.3);
+\begin{scope}[shift={(3.25,7.72)},line width=1pt,line cap=join,line join=round,scale=0.32]
+\draw ({2*sqrt(2)},0) -- (0,0) -- (0,4) -- ({2*sqrt(2)},4);
+\draw[dashed] ({2*sqrt(2)},0) -- +(0,4);
+\draw[dashed,line width=0.5pt] (0,2) -- ({2*sqrt(2)},2);
+\draw[gray,->,shorten >=1mm, shorten <=1mm] (0,0) arc (-30:30:{2/sin(30)});
+\end{scope}
+
+\draw[line width=1pt] (4.9125,9.5) rectangle +(2,-2);
+\node[anchor=west] at (4.9125,9.35) {\setmainfont[Scale=0.55]{Bubble Sans}fold};
+\draw[line width=1pt] (4.9125,9.2) -- +(0.8,0) -- +(0.8,0.3);
+\begin{scope}[shift={(5.45,7.4)},line width=1pt,line cap=join,line join=round,scale=0.32]
+\draw (0,2) -- (0,4) -- ({2*sqrt(2)},4);
+\draw[dashed] ({2*sqrt(2)},2) -- +(0,2) (0,2) -- ({2*sqrt(2)},2);
+\draw[dashed,line width=0.5pt] ({sqrt(2)},2) -- +(0,2);
+\draw[gray,->,shorten >=1mm, shorten <=1mm] ({2*sqrt(2)},4) arc (300:240:{sqrt(2)/sin(30)});
+\end{scope}
+
+\draw[line width=1pt] (0.5125,7.3) rectangle +(2,-2);
+\node[anchor=west] at (0.5125,7.15) {\setmainfont[Scale=0.55]{Bubble Sans}Unfold and cut};
+\draw[line width=1pt] (0.5125,7) -- +(2,0);
+\newcommand{\scissor}[1][]{\begin{scope}[#1]
+\draw[fill=white] (-0.1,0.7) arc (180:{90+tan(0.2/1.1)}:1mm) -- (0,0.8) -- (0.2,-0.3) arc (90:-180:2mm) -- (0,-0.3) arc (0:80:1mm) -- cycle (0.2,-0.5) circle (1mm);
+\fill[black] (0,0) circle (0.5mm);
+\end{scope}}
+\begin{scope}[line width=1pt,line cap=join,line join=round,shift={(1,5.5)},scale=0.32]
+\draw ({2*sqrt(2)},0) -- (0,0) -- (0,4) -- ({2*sqrt(2)},4);
+\begin{scope}
+\clip ({sqrt(2)},2) -- ({2*sqrt(2)},2) -- ({2*sqrt(2)},0) -- ({3*sqrt(2)},0) -- ({3*sqrt(2)},4) -- ({sqrt(2)},4) -- cycle;
+\scissor[shift={({2.25*sqrt(2)},2)},rotate=110]
+\end{scope}
+\draw[dashed] ({2*sqrt(2)},0) -- +(0,4);
+\draw[dashed,line width=0.5pt] (0,2) -- ({sqrt(2)},2) ({sqrt(2)},0) -- +(0,4);
+\draw[line width=1pt] plot[domain=1:2,variable=\x,samples=100,smooth] ({\x*sqrt(2)},{2+0.1*sin(1800*\x)});
+\scissor[shift={({2.25*sqrt(2)},2)},xscale=-1,rotate=-70]
+\end{scope}
+
+\draw[line width=1pt] (2.7125,7.3) rectangle +(2,-2);
+\node[anchor=west] at (2.7125,7.15) {\setmainfont[Scale=0.55]{Bubble Sans}Unfold};
+\draw[line width=1pt] (2.7125,7) -- +(1.05,0) -- +(1.05,0.3);
+\begin{scope}[shift={(2.8,5.52)},line width=1pt,line cap=join,line join=round,scale=0.32]
+\draw (0,0) rectangle +({4*sqrt(2)},4) ({sqrt(2)},2) -- ({3*sqrt(2)},2);
+\draw[dashed,line width=0.5pt] ({sqrt(2)},0) -- +(0,4) ({2*sqrt(2)},0) -- +(0,4) ({3*sqrt(2)},0) -- +(0,4) (0,2) -- ({sqrt(2)},2) ({3*sqrt(2)},2) -- ({4*sqrt(2)},2);
+\end{scope}
+
+\draw[line width=1pt] (4.9125,7.3) rectangle +(2,-2);
+\node[anchor=west] at (4.9125,7.15) {\setmainfont[Scale=0.55]{Bubble Sans}Fold};
+\draw[line width=1pt] (4.9125,7) -- +(0.8,0) -- +(0.8,0.3);
+\begin{scope}[shift={(5,5.52)},line width=1pt,line cap=join,line join=round,scale=0.32]
+\draw (0,0) rectangle +({4*sqrt(2)},4) ({sqrt(2)},2) -- ({3*sqrt(2)},2);
+\draw[dashed,line width=0.5pt] ({sqrt(2)},0) -- +(0,4) ({2*sqrt(2)},0) -- +(0,4) ({3*sqrt(2)},0) -- +(0,4) (0,2) -- ({sqrt(2)},2) ({3*sqrt(2)},2) -- ({4*sqrt(2)},2);
+\draw[gray,->,shorten >=2mm, shorten <=2mm] (0,4) arc (30:-30:{2/sin(30)});
+\draw[gray,->,shorten >=2mm, shorten <=2mm] ({4*sqrt(2)},4) arc (150:210:{2/sin(30)});
+\end{scope}
+
+\draw[line width=1pt] (0.5125,5.1) rectangle +(2,-2);
+\node[anchor=west] at (0.5125,4.95) {\setmainfont[Scale=0.55]{Bubble Sans}Push into a plus};
+\draw[line width=1pt] (0.5125,4.8) -- +(2,0);
+\begin{scope}[shift={(0.58,3.95)},line width=1pt,line cap=join,line join=round,scale=0.38,
+    x={(0.866cm,-0.37cm)},z={(0.866cm,0.37cm)}]
+\draw[gray,->,shorten >=2mm, shorten <=2mm] ({2*sqrt(2)},1.5,0) -- +(0,0,1);
+\fill[white] (0,0,0) -- (0,2,0) -- ({4*sqrt(2)},2,0) -- ({4*sqrt(2)},0,0) -- cycle;
+\draw (0,2,0) -- (0,0,0) -- ({4*sqrt(2)},0,0) -- ({4*sqrt(2)},2,0) ({sqrt(2)},2,0) -- ({3*sqrt(2)},2,0);
+\draw[dashed,line width=0.5pt] ({sqrt(2)},0,0) -- +(0,2,0) ({2*sqrt(2)},0,0) -- +(0,2,0) ({3*sqrt(2)},0,0) -- +(0,2,0);
+\draw[dashed] (0,2,0) -- ({sqrt(2)},2,0) ({3*sqrt(2)},2,0) -- ({4*sqrt(2)},2,0);
+\draw[gray,->,shorten >=1pt, shorten <=1pt] ({4*sqrt(2)},1,0) -- +({-sqrt(2)},0,0);
+\draw[gray,->,shorten >=1pt, shorten <=1pt] (0,1,0) -- +({sqrt(2)},0,0);
+\draw[gray,->,shorten >=1pt, shorten <=1pt] ({2*sqrt(2)},1.5,0) -- +(0,0,-1);
+\end{scope}
+
+\draw[line width=1pt] (2.7125,5.1) rectangle +(2,-2);
+\node[anchor=west] at (2.7125,4.95) {\setmainfont[Scale=0.55]{Bubble Sans}flatten};
+\draw[line width=1pt] (2.7125,4.8) -- +(1.15,0) -- +(1.15,0.3);
+\begin{scope}[shift={(2.78,3.9)},line width=1pt,line cap=join,line join=round,scale=0.38,x={(0.866cm,-0.37cm)},z={(0.866cm,0.37cm)}]
+\begin{scope}[canvas is xz plane at y=1.8]
+\draw[gray,->,shorten >=2pt, shorten <=2pt] ({3*sqrt(2)},0) arc (0:90:{sqrt(2)});
+\draw[gray,->,shorten >=5pt, shorten <=2pt] ({2*sqrt(2)},{-sqrt(2)}) arc (270:90:{sqrt(2)});
+\end{scope}
+\fill[white] ({sqrt(2)},2,0) -- ({sqrt(2)},0,0) -- ({2*sqrt(2)},0,0) -- ({2*sqrt(2)},0,{sqrt(2)}) -- ({2*sqrt(2)},2,{sqrt(2)}) -- ({2*sqrt(2)},2,0) -- cycle;
+\draw ({sqrt(2)},2,0) -- ({sqrt(2)},0,0) -- ({2*sqrt(2)},0,0) -- ({2*sqrt(2)},0,{sqrt(2)}) ({2*sqrt(2)},2,{sqrt(2)}) -- ({2*sqrt(2)},2,0);
+\draw[dashed] ({sqrt(2)},2,0) -- ({2*sqrt(2)},2,0) ({2*sqrt(2)},0,{sqrt(2)}) -- ({2*sqrt(2)},2,{sqrt(2)});
+\fill[white] ({3*sqrt(2)},2,0) -- ({3*sqrt(2)},0,0) -- ({2*sqrt(2)},0,0) -- ({2*sqrt(2)},0,{-sqrt(2)}) -- ({2*sqrt(2)},2,{-sqrt(2)}) -- ({2*sqrt(2)},2,0) -- cycle;
+\draw ({3*sqrt(2)},2,0) -- ({3*sqrt(2)},0,0) -- ({2*sqrt(2)},0,0) -- ({2*sqrt(2)},0,{-sqrt(2)}) ({2*sqrt(2)},2,{-sqrt(2)}) -- ({2*sqrt(2)},2,0);
+\draw[dashed] ({3*sqrt(2)},2,0) -- ({2*sqrt(2)},2,0) ({2*sqrt(2)},0,{-sqrt(2)}) -- ({2*sqrt(2)},2,{-sqrt(2)});
+\draw[dashed,line width=0.5pt] ({2*sqrt(2)},0,0) -- +(0,2,0);
+\end{scope}
+
+\draw[line width=1pt] (4.9125,5.1) rectangle +(2,-2);
+\node[anchor=west] at (4.9125,4.95) {\setmainfont[Scale=0.55]{Bubble Sans}read};
+\draw[line width=1pt] (4.9125,4.8) -- +(0.8,0) -- +(0.8,0.3);
+\begin{scope}[shift={(5.5,3.5)},line width=1pt,line cap=join,line join=round,scale=0.5]
+\begin{scope}[x={(0.97cm,0.06cm)}]
+\fill[white] (0,0) -- ({sqrt(2)},0) -- ({sqrt(2)},2) -- (0,2) -- cycle;
+\draw (0,0) -- ({sqrt(2)},0) ({sqrt(2)},2) -- (0,2);
+\draw[dashed] ({sqrt(2)},0) -- ({sqrt(2)},2);
+\end{scope}
+\begin{scope}[x={(0.98cm,0.03cm)}]
+\fill[white] (0,0) -- ({sqrt(2)},0) -- ({sqrt(2)},2) -- (0,2) -- cycle;
+\draw (0,0) -- ({sqrt(2)},0) -- ({sqrt(2)},2);
+\draw[dashed] (0,2) -- ({sqrt(2)},2);
+\end{scope}
+\begin{scope}[x={(0.99cm,0cm)}]
+\fill[white] (0,0) -- ({sqrt(2)},0) -- ({sqrt(2)},2) -- (0,2) -- cycle;
+\draw (0,0) -- ({sqrt(2)},0) ({sqrt(2)},2) -- (0,2);
+\draw[dashed] ({sqrt(2)},0) -- ({sqrt(2)},2);
+\end{scope}
+\begin{scope}[x={(1cm,-0.03cm)}]
+\fill[white] (0,0) -- ({sqrt(2)},0) -- ({sqrt(2)},2) -- (0,2) -- cycle;
+\draw (0,0) -- ({sqrt(2)},0) -- ({sqrt(2)},2);
+\draw[dashed] (0,0) -- (0,2) -- ({sqrt(2)},2);
+\end{scope}
+\end{scope}
+
+
+\node[anchor=south,text width=7cm] at (3.7125,0.15) {
+\null\hfill\scalebox{0.5}{
+\parbox{12.5cm}{\raggedright
+\begin{center}
+\scalebox{1.3}{{\setmainfont[Scale=1.3]{Chalkdust Icon Font}d} mscroggs.co.uk/puzzlebug}
+\end{center}
+
+\vspace{3mm}
+
+\noindent Puzzlebug \#2 was published in January 2026.
+it was written and drawn by Matthew Scroggs.
+Lettering is done using the fonts
+Bubble Sans by Abay Emes
+and
+Bangers by Vernon Adams:
+both are available under the SiL Open Font License version 1.1.
+
+\begin{center}
+\textcopyright{} Matthew Scroggs, 2026\\
+iSSN 2978-4255 (print). iSSN 2978-4263 (online).\\
+Published by mscroggs.co.uk, King's Lynn, UK.\\
+\bugcode%
+{1}% numbering version
+{2}% issue number
+{0}% edit number (0=draft, 1=first release)
+{0}% 0=test, 1=print, 2=pdf
+{0}% print run number
+{0}% print run size
+\end{center}
+}}\hfill\null};
+
+
+\end{scope}
+
+%\draw[line width=1pt,red]
+%    (14.85-1.3125-5.5*0.8,21-4.3-5.5*0.8) -- (29.7-0.5-0.5,21-3.2-3)
+%    (14.8+5*0.7,3.9+2*0.7) -- (22.275-2.8,21-1.4)
+%;
+%\draw[dashed,line width=1pt,blue]
+%    (14.85-1.3125-2.5*0.8,21-4.3-2.5*0.8) -- (29.7-0.5-0.5,21-3.2-3)
+%    (14.85-1.3125-2.5*0.8,21-4.3-1.5*0.8) -- (29.7-0.5-0.5,21-3.2-3)
+%    (14.85-1.3125-2.5*0.8,21-4.3-0.5*0.8) -- (29.7-0.5-0.5,21-3.2-3)
+%    (14.8+3*0.7,3.9+1*0.7) -- (22.275-0.5,21-1.4)
+%;
+%\draw[red] (0,10.5) -- +(29.7,0) (7.425,0) -- +(0,21) (14.85,0) -- +(0,21) (22.275,0) -- +(0,21);
+
+\end{tikzpicture}
+\end{center}
+\end{document}
