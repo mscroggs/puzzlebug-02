@@ -1,0 +1,22 @@
+\documentclass[letter,landscape]{article}
+\usepackage{tikz}
+\usepackage[math-style=ISO,bold-style=ISO,mathrm=sym]{unicode-math}
+\usepackage[top=0mm,bottom=0mm,left=0mm,right=0mm]{geometry}
+
+\setmainfont{Bubble Sans}
+
+\begin{document}
+\begin{center}
+\begin{tikzpicture}[line cap=round,line join=round]
+%\clip (0,0) rectangle (29.7,21);
+\clip (0,0) rectangle (27.94,21.59);
+%\fill[red] (0,0) rectangle (27.94,21.59);
+\node[anchor=south west,inner sep=0pt] at (0,0) {\includegraphics[width=27.94cm]{puzzlebug-02.pdf}};
+\draw[gray,dashed,line width=1pt] (0,21 * 279.4/297) -- +(27.94,0);
+\node[gray,anchor=south] at (27.94/2,21 * 279.4/297) {Cut along this dashed line, then follow the folding instructions};
+
+
+\end{tikzpicture}
+\end{center}
+
+\end{document}
