@@ -1,4 +1,7 @@
+from random import shuffle, seed
 from itertools import product, permutations
+
+seed(3)
 
 RED = "\033[31m"
 DEFAULT = "\033[0m"
@@ -130,7 +133,108 @@ rows = puzzle.strip().split("\n")
 
 shape = (len(rows), len(rows[0]))
 
-solve(rows, aclues, dclues, True)
+sol = solve(rows, aclues, dclues, True)
+
+word = [i for i in "COUNTLIVES"]
+
+code = {}
+
+for i, l in enumerate("VIOLENT"):
+    code[sol[(0,i + 2)][0]] = l
+    word.remove(l)
+
+shuffle(word)
+
+for i in range(10):
+    if i not in code:
+        code[i] = word.pop()
+
+print(code)
+
+for i in range(shape[0]):
+    row = "".join(code[sol[(i, j)][0]] if (i, j) in sol else "#" for j in range(shape[1]))
+    print(row)
+print()
+
+
+acodes = [
+    ["".join(code[int(i)] for i in str(j)) for j in c]
+    for c in aclues
+]
+dcodes = [
+    ["".join(code[int(i)] for i in str(j)) for j in c]
+    for c in dclues
+]
+
+print("ACLUES")
+for c in aclues:
+    print(["".join(code[int(i)] for i in str(j)) for j in c])
+print("DCLUES")
+for c in dclues:
+    print(["".join(code[int(i)] for i in str(j)) for j in c])
+
+preamble = True
+
+lines = []
+if preamble:
+    lines.append("\\documentclass{standalone}")
+    lines.append("\\usepackage{tikz}")
+    lines.append("\\usepackage{fontspec}")
+    lines.append("\\setmainfont{Bubble Sans}")
+    lines.append("\\begin{document}")
+lines.append("\\begin{tikzpicture}")
+
+lines.append(f"\\fill[white] (-1,0) rectangle +({shape[1] + 1},{shape[0] + 1});")
+lines.append("\\fill[black] " + (
+    " ".join(f"(-1,{i}) rectangle +(1,1)" for i in range(0, shape[0] + 1))
+) + (
+    " ".join(f"({i},{shape[0]}) rectangle +(1,1)" for i in range(shape[1]))
+) + (
+    " ".join(f"({j},{shape[0] - 1 - i}) rectangle +(1,1)" for i in range(shape[1]) for j in range(shape[0]) if (i,j) not in sol)
+) + ";")
+
+for i, c in enumerate(acodes):
+    n = 0
+    for j in range(shape[1]):
+        if (i, j-1) not in sol and (i, j) in sol and (i, j+1) in sol:
+            lines.append(f"\\fill[black!20!white] ({j},{shape[0] - i-1}) -- +(0,1) -- +(-1,1) -- cycle;")
+            lines.append(f"\\node[inner sep=2pt,anchor=east] at ({j},{shape[0] - i-1}.7) {{{c[n]}}};")
+            n += 1
+
+for j, c in enumerate(dcodes):
+    n = 0
+    for i in range(shape[0]):
+        if (i-1, j) not in sol and (i, j) in sol and (i+1, j) in sol:
+            lines.append(f"\\fill[black!20!white] ({j},{shape[0] - i}) -- +(1,0) -- +(0,1) -- cycle;")
+            lines.append(f"\\node[inner sep=2pt,anchor=south] at ({j}.3,{shape[0] - i}) {{{c[n]}}};")
+            n += 1
+
+lines.append(f"\\foreach \\x in {{-1,...,{shape[1]}}}")
+lines.append(f"  \\draw (\\x,0) -- (\\x,{shape[0] + 1});")
+lines.append(f"\\foreach \\y in {{0,...,{shape[0] + 1}}}")
+lines.append(f"  \\draw (-1,\\y) -- ({shape[1]},\\y);")
+
+lines.append("\\draw " + (
+    " ".join(f"({i},{shape[0]+1}) -- +(1,-1)" for i in range(shape[1]))
+) + (
+    " ".join(f"({j},{shape[0] - i}) -- +(1,-1)" for i in range(shape[1]) for j in range(shape[0]) if (i,j) not in sol)
+) + ";")
+
+for i, j in [
+    (3,5), (4,3), (5,6), (6,4)
+]:
+    lines.append(f"\\node[black!50!white] at ({j}.5,{shape[0] - 1 - i}.5) {{\\large {code[sol[(i, j)][0]]}}};")
+
+lines.append("\\end{tikzpicture}")
+if preamble:
+    lines.append("\\end{document}")
+
+with open("kakuro.tex", "w") as f:
+    f.write("\n".join(lines))
+
+print()()
+
+
 
 start = -1
 
