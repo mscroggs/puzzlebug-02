@@ -270,7 +270,82 @@
 \end{scope}
 
 %%%%%%%%%%%%%%%%%%%% PAGE THREE %%%%%%%%%%%%%%%%%%%%
-\begin{scope}[shift={(29.7,21)},rotate=180]
+\begin{scope}[shift={(29.7,21)},rotate=180,transform shape]
+\node[anchor=west] at (0.3,9.8) {\setmainfont[Scale=1.8]{Bangers}on both sides};
+
+\node[scale=0.6,anchor=south] at (0.8,8.7) {RAKE};
+\node[scale=0.6,anchor=south] at (1.6,8.7) {THOS};
+\node[scale=0.6,anchor=south] at (2.4,8.7) {ACH};
+\node[scale=0.6,anchor=south] at (3.2,8.7) {OUTE};
+\draw[line width=1pt,line join=round,line cap=round]
+    (0.4,7.8) rectangle +(0.8*4,0.8)
+    (1.2,7.8) -- +(0,0.8)
+    (2.0,7.8) -- +(0,0.8)
+    (2.8,7.8) -- +(0,0.8)
+;
+
+\node[black!50!white] at (0.8,8.2) {\color{red}\large D};
+\node[black!50!white] at (1.6,8.2) {\color{red}\large E};
+\node[black!50!white] at (2.4,8.2) {\color{red}\large E};
+\node[black!50!white] at (3.2,8.2) {\color{red}\large R};
+
+% start bug
+\begin{scope}[shift={(2,6.75)},xscale=0.8,yscale=0.8]
+% legs
+\draw[line width=2pt] ({0.1*cos(10)},{-0.1*sin(10)}) arc (150:160:1.8) arc (20:170:0.03);
+\draw[line width=2pt] ({0.65*cos(10)},{-0.65*sin(10)}) arc (150:160:1.8) arc (20:170:0.03);
+\draw[line width=2pt] ({1.2*cos(10)},{-1.2*sin(10)}) arc (150:160:1.8) arc (20:170:0.03);
+\draw[line width=2pt] ({3.2-1.2*cos(10)},{-1.2*sin(10)}) arc (30:20:1.8) arc (170:20:0.03);
+% body
+\begin{scope}
+\clip (0,0) arc (180:-20:1) -- cycle;
+\fill[white] (-4,-4) rectangle (4,4);
+\draw[gray,line width=1pt,fill=gray]
+    (0.2,0.4) circle (0.2)
+    (0.8,0.2) ellipse (0.19 and 0.22)
+    (1,0.9) ellipse (0.2 and 0.17)
+    (1.85,0.8) circle (0.2)
+;
+\draw[line width=1pt] (1.6,0.03) arc (-20:90:0.8);
+\end{scope}
+\draw[line width=1pt] (0,0) arc (180:-20:1) -- cycle;
+% head
+\draw[line width=1pt,fill=black] (1.6,0.03) circle (0.5);
+\draw[line width=1.6pt]
+    (1.8,0.4) arc (156:152:3) arc (-125:120:0.05)
+    (1.4,0.4) arc (24:28:3) arc (-45:200:0.05);
+% eyes
+\begin{scope}[shift={(0,-0.02)}]
+\draw[line width=1pt,fill=white] (1.83,-0.03) circle (0.2);
+\draw[line width=1pt,fill=white] (1.37,-0.03) circle (0.2);
+\begin{scope}[shift={(-0.01,0.025)}]
+\draw[line width=1pt,fill=black] (1.83,-0.03) circle (0.1);
+\draw[line width=1pt,fill=black] (1.37,-0.03) circle (0.1);
+\end{scope}
+\draw[line width=2pt,black] (1.7,0.23) arc (110:70:0.32);
+\draw[line width=1.3pt,white] (1.7,0.23) arc (110:70:0.32);
+\draw[line width=2pt,black] (1.5,0.23) arc (70:110:0.32);
+\draw[line width=1.3pt,white] (1.5,0.23) arc (70:110:0.32);
+\end{scope}
+\end{scope}
+% end bug
+
+\draw[line width=1pt,fill=white]
+    (4,6.9) -- (4.35,7.18) [rounded corners=5pt] -- (4.1,7.18) -- (4.1,10.15)
+    -- (7.1,10.15) -- (7.1,7.18) [rounded corners=0pt]
+    -- (4.6,7.18) -- cycle;
+
+\node[anchor=south,text width=3.5cm] at (5.62,7.2) {
+\null\hfill\scalebox{0.6}{
+\parbox{4.7cm}{\raggedright
+\noindent
+in each box, write the letter than can be put before and after the letters above the box
+to make two words.
+For example, you could write Q in the first box if QRAKE and RAKEQ were words.
+The four letters you write will spell a word.
+}}\hfill\null};
+
+
 \pagenum{3}
 \end{scope}
 
@@ -285,7 +360,123 @@
 \end{scope}
 
 %%%%%%%%%%%%%%%%%%%% PAGE SIX %%%%%%%%%%%%%%%%%%%%
-\begin{scope}[shift={(7.425,21)},rotate=180]
+\begin{scope}[shift={(7.425,21)},rotate=180,transform shape]
+
+\node[anchor=west] at (0.3,9.8) {\setmainfont[Scale=1.8]{Bangers}...and finally};
+
+G + WHITE = WEIGHT
+R + TEAL = ALERT
+E + RED = DEER
+E + GOLD = LODGE
+N + VIOLET = VIOLENT
+
+\begin{scope}[shift={(0,0.4)}]
+\node[anchor=south,scale=0.6,align=center] at (6.5,8.8) {extra\\letters};
+\node[anchor=east,scale=0.6,align=right,red] at (2.25,8.5) {weight};
+\node[anchor=east,scale=0.6,align=right,red] at (2.25,7.9) {alert};
+\node[anchor=east,scale=0.6,align=right] at (2.25,7.3) {word from\\on both sides};
+\node[anchor=east,scale=0.6,align=right,red] at (2.25,6.7) {lodge};
+\node[anchor=east,scale=0.6,align=right] at (2.25,6.1) {top row of\\crypturo};
+\node[red] at (2.6,6.1) {V};
+\node[red] at (3.2,6.1) {I};
+\node[red] at (3.8,6.1) {O};
+\node[red] at (4.4,6.1) {L};
+\node[red] at (5.0,6.1) {E};
+\node[red] at (5.6,6.1) {T};
+\node[red] at (6.5,6.1) {N};
+\node[red] at (2.6,7.3) {R};
+\node[red] at (3.2,7.3) {E};
+\node[red] at (3.8,7.3) {D};
+\node[red] at (6.5,7.3) {E};
+\draw[line width=1pt,line join=round,line cap=round,shift={(2.3,5.8)},scale=0.6]
+    (0,4) rectangle +(5,1)
+    (1,4) -- +(0,1)
+    (2,4) -- +(0,1)
+    (3,4) -- +(0,1)
+    (4,4) -- +(0,1)
+    (0,3) rectangle +(4,1)
+    (1,3) -- +(0,1)
+    (2,3) -- +(0,1)
+    (3,3) -- +(0,1)
+    (0,2) rectangle +(3,1)
+    (1,2) -- +(0,1)
+    (2,2) -- +(0,1)
+    (0,1) rectangle +(4,1)
+    (1,1) -- +(0,1)
+    (2,1) -- +(0,1)
+    (3,1) -- +(0,1)
+    (0,0) rectangle +(6,1)
+    (1,0) -- +(0,1)
+    (2,0) -- +(0,1)
+    (3,0) -- +(0,1)
+    (4,0) -- +(0,1)
+    (5,0) -- +(0,1)
+    (6.5,0) rectangle +(1,5)
+    (6.5,1) -- +(1,0)
+    (6.5,2) -- +(1,0)
+    (6.5,3) -- +(1,0)
+    (6.5,4) -- +(1,0)
+;
+\end{scope}
+
+\draw[line width=1pt,fill=white]
+    (5,1.2) -- (4.7,1.9) [rounded corners=5pt] -- (6.9,1.9) -- (6.9,4.1)
+    -- (0.5,4.1) -- (0.5,1.4) -- (4,1.4) -- (4,1.9) [rounded corners=0pt]
+    -- (4.5,1.9) -- cycle;
+
+\node[anchor=north,text width=7cm] at (3.7125,4.08) {
+\null\hfill\scalebox{0.6}{
+\parbox{10.3cm}{\raggedright
+\noindent The words that are
+{\color{red}???},
+{\color{red}???},
+the answer to on both sides on page 3,
+{\color{red}???}, and
+in the top row of the solution to crypturo on page 2 are all anagrams of themed words with an extra letter added. Write the themed words in the boxes above and the extra letters
+in the boxes to the right. One you have done this, the extra letters will spell another word with the same theme:
+you can use that word as a
+discount code to get 50\% off Puzzlebug \#3.
+}}\hfill\null};
+
+% start bug
+\begin{scope}[shift={(6.7,1)},xscale=-0.8,yscale=0.8]
+% legs
+\draw[line width=2pt] ({0.1*cos(10)},{-0.1*sin(10)}) arc (150:160:1.8) arc (20:170:0.03);
+\draw[line width=2pt] ({0.65*cos(10)},{-0.65*sin(10)}) arc (150:160:1.8) arc (20:170:0.03);
+\draw[line width=2pt] ({1.2*cos(10)},{-1.2*sin(10)}) arc (150:160:1.8) arc (20:170:0.03);
+\draw[line width=2pt] ({3.2-1.2*cos(10)},{-1.2*sin(10)}) arc (30:20:1.8) arc (170:20:0.03);
+% body
+\begin{scope}
+\clip (0,0) arc (180:-20:1) -- cycle;
+\fill[white] (-4,-4) rectangle (4,4);
+\draw[gray,line width=1pt,fill=gray]
+    (0.2,0.4) circle (0.2)
+    (0.8,0.2) ellipse (0.19 and 0.22)
+    (1,0.9) ellipse (0.2 and 0.17)
+    (1.85,0.8) circle (0.2)
+;
+\draw[line width=1pt] (1.6,0.03) arc (-20:90:0.8);
+\end{scope}
+\draw[line width=1pt] (0,0) arc (180:-20:1) -- cycle;
+% head
+\draw[line width=1pt,fill=black] (1.6,0.03) circle (0.5);
+\draw[line width=1.6pt]
+    (1.8,0.4) arc (156:152:3) arc (-125:-365:0.05)
+    (1.4,0.4) arc (24:28:3) arc (-45:-290:0.05);
+% eyes
+\draw[line width=1pt,fill=white] (1.83,-0.03) circle (0.2);
+\draw[line width=1pt,fill=white] (1.37,-0.03) circle (0.2);
+\begin{scope}[shift={(0.02,0)}]
+\draw[line width=1pt,fill=black] (1.83,-0.03) circle (0.1);
+\draw[line width=1pt,fill=black] (1.37,-0.03) circle (0.1);
+\end{scope}
+\draw[line width=2pt,black] (1.7,0.23) arc (110:70:0.32);
+\draw[line width=1.3pt,white] (1.7,0.23) arc (110:70:0.32);
+\draw[line width=2pt,black] (1.5,0.23) arc (70:110:0.32);
+\draw[line width=1.3pt,white] (1.5,0.23) arc (70:110:0.32);
+\end{scope}
+% end bug
+
 \pagenum{6}
 \end{scope}
 
