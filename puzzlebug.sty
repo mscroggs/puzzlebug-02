@@ -2,6 +2,7 @@
 
 \RequirePackage{tikz}
 \usetikzlibrary{3d}
+\RequirePackage{ifthen}
 \RequirePackage{amsmath}
 \RequirePackage[math-style=ISO,bold-style=ISO,mathrm=sym]{unicode-math}
 \RequirePackage[top=0mm,bottom=0mm,left=0mm,right=0mm]{geometry}
@@ -16,6 +17,8 @@
 \setmainfont{Bubble Sans}
 \DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
 
+% ---------------------------------------------------------------------------------------
+% % INPUTS
 \newcommand{\pagenum}[1]{
 \begin{scope}[shift={(3.7125,0.8)}]
 \draw[line width=1pt,line join=round,rounded corners=1mm] (-0.25,-0.25) rectangle (0.25,0.25);
@@ -55,6 +58,7 @@
 \end{scope}
 }
 
+% ---------------------------------------------------------------------------------------
 % PUZZLEBUG NUMBERING SYSTEM v1
 % P U Z Z L E B U G
 %  A B B C D E E E
@@ -68,20 +72,24 @@
 %   E,EE is print run number and size of print run (hex)
 % if D==2:
 %   EEE is PDF
-%% inputs:
-%%  NUMBERING VERSION
-%%  ISSUE NuMBER
-%%  EDIT NUMBER
-%%  TYPE (0=test, 1=print, 2=pdf)
-%%  if TYPE==1 PRINT RUN NUMBER else <IGNORED>
-%%  if TYPE==1 PRINT RUN SIZE else <IGNORED>
+% % INPUTS
+% % #1: NUMBERING VERSION
+% % #2: ISSUE NuMBER
+% % #3: EDIT NUMBER
+% % #4: TYPE (0=test, 1=print, 2=pdf)
+% % #5: if TYPE==1 PRINT RUN NUMBER else <IGNORED>
+% % #6: if TYPE==1 PRINT RUN SIZE else <IGNORED>
 \newcommand{\bugcode}[6]{P\StrChar{\nhex{1}{#1}}{1}U\StrChar{\nhex{2}{#2}}{1}Z\StrChar{\nhex{2}{#2}}{2}Z\StrChar{\nhex{1}{#3}}{1}L#4E\ifthenelse{\equal{#4}{0}}{1}{}\ifthenelse{\equal{#4}{1}}{\StrChar{\nhex{1}{#5}}{1}}{}\ifthenelse{\equal{#4}{2}}{P}{}B\ifthenelse{\equal{#4}{0}}{2}{}\ifthenelse{\equal{#4}{1}}{\StrChar{\nhex{2}{#6}}{1}}{}\ifthenelse{\equal{#4}{2}}{D}{}U\ifthenelse{\equal{#4}{0}}{3}{}\ifthenelse{\equal{#4}{1}}{\StrChar{\nhex{2}{#6}}{2}}{}\ifthenelse{\equal{#4}{2}}{F}{}G}
 
+% ---------------------------------------------------------------------------------------
+% % INPUTS
+% % #1: scope options
 \newcommand{\scissor}[1][]{\begin{scope}[#1]
 \draw[fill=white] (-0.1,0.7) arc (180:{90+tan(0.2/1.1)}:1mm) -- (0,0.8) -- (0.2,-0.3) arc (90:-180:2mm) -- (0,-0.3) arc (0:80:1mm) -- cycle (0.2,-0.5) circle (1mm);
 \fill[black] (0,0) circle (0.5mm);
 \end{scope}}
 
+% ---------------------------------------------------------------------------------------
 \newcommand{\howtofold}{
 \node[anchor=north,text width=7cm] at (3.7125,10.1) {
 \null\hfill\scalebox{0.8}{
@@ -209,6 +217,93 @@
 \end{scope}
 }
 
+% ---------------------------------------------------------------------------------------
+% % INPUTS
+% % #1: y position (default: 9:8)
+% % #2: title
 \newcommand{\puzztitle}[2][9.8]{
 \node[anchor=west] at (0.3,#1) {\setmainfont[Scale=1.8]{Bangers}#2};
+}
+
+% ---------------------------------------------------------------------------------------
+% % INPUTS
+% % #1: size: standard/large (default: standard)
+% % #2: direction: l/r
+% % #3: eye position
+% % #4: eyeball position
+% % #5: emotion
+\newcommand{\puzzlebug}[5][standard]{
+% start bug
+\ifthenelse{\equal{#1}{standard}}{\ifthenelse{\equal{#2}{l}}{\begin{scope}[yscale=0.8,xscale=-0.8]}{\begin{scope}[scale=0.8]}}{\begin{scope}}
+% legs
+\draw[line width=2pt] ({0.1*cos(10)},{-0.1*sin(10)}) arc (150:160:1.8) arc (20:170:0.03);
+\draw[line width=2pt] ({0.65*cos(10)},{-0.65*sin(10)}) arc (150:160:1.8) arc (20:170:0.03);
+\draw[line width=2pt] ({1.2*cos(10)},{-1.2*sin(10)}) arc (150:160:1.8) arc (20:170:0.03);
+\draw[line width=2pt] ({3.2-1.2*cos(10)},{-1.2*sin(10)}) arc (30:20:1.8) arc (170:20:0.03);
+% body
+\begin{scope}
+\clip (0,0) arc (180:-20:1) -- cycle;
+\fill[white] (-4,-4) rectangle (4,4);
+\draw[gray,line width=1pt,fill=gray]
+    (0.2,0.4) circle (0.2)
+    (0.8,0.2) ellipse (0.19 and 0.22)
+    (1,0.9) ellipse (0.2 and 0.17)
+    (1.85,0.8) circle (0.2)
+;
+\draw[line width=1pt] (1.6,0.03) arc (-20:90:0.8);
+\end{scope}
+\draw[line width=1pt] (0,0) arc (180:-20:1) -- cycle;
+% head
+\draw[line width=1pt,fill=black] (1.6,0.03) circle (0.5);
+\ifthenelse{\equal{#2}{r}}{
+\draw[line width=1.6pt]
+    (1.8,0.4) arc (156:152:3) arc (-125:120:0.05)
+    (1.4,0.4) arc (24:28:3) arc (-45:200:0.05);
+}{
+\draw[line width=1.6pt]
+    (1.8,0.4) arc (156:152:3) arc (-125:-370:0.05)
+    (1.4,0.4) arc (24:28:3) arc (-45:-290:0.05);
+}
+% eyes
+\begin{scope}[shift={#3}]
+\draw[line width=1pt,fill=white] (1.83,-0.03) circle (0.2);
+\draw[line width=1pt,fill=white] (1.37,-0.03) circle (0.2);
+\begin{scope}[shift={#4}]
+\draw[line width=1pt,fill=black] (1.83,-0.03) circle (0.1);
+\draw[line width=1pt,fill=black] (1.37,-0.03) circle (0.1);
+\end{scope}
+
+\ifthenelse{\equal{#5}{neutral}}{
+\draw[line width=2pt,black] (1.7,0.23) arc (110:70:0.32);
+\draw[line width=1.3pt,white] (1.7,0.23) arc (110:70:0.32);
+\draw[line width=2pt,black] (1.5,0.23) arc (70:110:0.32);
+\draw[line width=1.3pt,white] (1.5,0.23) arc (70:110:0.32);
+}{}
+
+\ifthenelse{\equal{#5}{angry}}{
+\draw[line width=1.6pt,black] (1.7,0.19) arc (110:90:0.7);
+\draw[line width=1.3*0.8pt,white] (1.7,0.19) arc (110:90:0.7);
+\draw[line width=1.6pt,black] (1.5,0.19) arc (70:90:0.7);
+\draw[line width=1.3*0.8pt,white] (1.5,0.19) arc (70:90:0.7);
+}{}
+
+
+\ifthenelse{\equal{#5}{raised}}{
+\draw[line width=2pt,black] (1.7,0.26) arc (110:70:0.32);
+\draw[line width=1.3pt,white] (1.7,0.26) arc (110:70:0.32);
+\draw[line width=2pt,black] (1.5,0.26) arc (70:110:0.32);
+\draw[line width=1.3pt,white] (1.5,0.26) arc (70:110:0.32);
+}{}
+
+\ifthenelse{\equal{#5}{worried}}{
+\draw[line width=2pt,black] (1.7,0.26) arc (90:70:0.7);
+\draw[line width=1.3pt,white] (1.7,0.26) arc (90:70:0.7);
+\draw[line width=2pt,black] (1.5,0.26) arc (90:110:0.7);
+\draw[line width=1.3pt,white] (1.5,0.26) arc (90:110:0.7);
+}{}
+
+\end{scope}
+
+\end{scope}
+% end bug
 }
