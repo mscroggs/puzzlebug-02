@@ -163,7 +163,7 @@
 
 \draw[line width=1pt,fill=white]
     (-0.5,9) -- (0.5,9.1) [rounded corners=5pt] -- (0.5,10.15)
-    -- (6.9,10.15) -- (6.9,6.31) -- (0.5,6.31) [rounded corners=0pt]
+    -- (6.9,10.15) -- (6.9,6.56) -- (0.5,6.56) [rounded corners=0pt]
     -- (0.5,8.8) -- cycle;
 
 
@@ -175,7 +175,7 @@ the letters e, v, i, l, c, o, u, n, t and s represent the digits 0 to 9, with ea
 write a letter representing a non-zero digit in each white square so that the
 sum of the digits in each horizontal and vertical run is the total given above or to the left of the run, with no letter repeated in the run.
 for example, if s and o represent 1 and 2, then the three boxes in the second row next to the clue `SO' must all contain three different letters that represent digits adding to 12.
-none of the numbers given as a clue starts with a leading 0.
+none of the numbers given as a clue starts with a zero.
 when the puzzle is complete, the letters in the top row will spell out a word.
 }}\hfill\null};
 
@@ -228,13 +228,141 @@ The four letters you write will spell a word.
 
 %%%%%%%%%%%%%%%%%%%% PAGE THREE %%%%%%%%%%%%%%%%%%%%
 \begin{scope}[shift={(29.7,21)},rotate=180,transform shape]
+\puzztitle{twenty digit party slide}
 
+\begin{scope}[shift={(1,3.5)},x=8mm,y=8mm]
+
+\foreach \y in {0,...,4}
+    \draw (5.7,\y.5) circle (0.45);
+\foreach \x in {0,...,4}
+    \draw (\x.5,5.7) circle (0.45);
+
+\node[scale=0.8] at (0.5,6.35) {P};
+\node[scale=0.8] at (1.5,6.35) {A};
+\node[scale=0.8] at (2.5,6.35) {R};
+\node[scale=0.8] at (3.5,6.35) {T};
+\node[scale=0.8] at (4.5,6.35) {Y};
+
+\node[scale=0.8] at (6.35,0.5) {E};
+\node[scale=0.8] at (6.35,1.5) {D};
+\node[scale=0.8] at (6.35,2.5) {I};
+\node[scale=0.8] at (6.35,3.5) {L};
+\node[scale=0.8] at (6.35,4.5) {S};
+
+\fill[white] (0,0) rectangle (5,5);
+\foreach \x in {0, ..., 5}
+  \draw[line width=0.5pt, black] (\x,0) -- (\x,5);
+\foreach \y in {0, ..., 5}
+  \draw[line width=0.5pt, black] (0,\y) -- (5,\y);
+\fill[black] (1,1) rectangle +(1,1) (1,3) rectangle +(1,1) (2,2) rectangle +(1,1) (3,1) rectangle +(1,1) (3,3) rectangle +(1,1);
+\node[anchor=north west,inner sep=1pt] at (0,5) {\footnotesize1};
+\node[anchor=north west,inner sep=1pt] at (2,5) {\footnotesize2};
+\node[anchor=north west,inner sep=1pt] at (4,5) {\footnotesize3};
+\node[anchor=north west,inner sep=1pt] at (0,3) {\footnotesize4};
+\node[anchor=north west,inner sep=1pt] at (3,3) {\footnotesize5};
+\node[anchor=north west,inner sep=1pt] at (2,2) {\footnotesize6};
+\node[anchor=north west,inner sep=1pt] at (0,1) {\footnotesize7};
+
+
+\node[red] at (0.5,0.5) {6};
+\node[red] at (1.5,0.5) {0};
+\node[red] at (2.5,0.5) {2};
+\node[red] at (3.5,0.5) {4};
+\node[red] at (4.5,0.5) {2};
+
+\node[red] at (0.5,1.5) {7};
+\node[red] at (2.5,1.5) {7};
+\node[red] at (4.5,1.5) {5};
+
+\node[red] at (0.5,2.5) {6};
+\node[red] at (1.5,2.5) {0};
+\node[red] at (3.5,2.5) {8};
+\node[red] at (4.5,2.5) {8};
+
+\node[red] at (0.5,3.5) {1};
+\node[red] at (2.5,3.5) {3};
+\node[red] at (4.5,3.5) {1};
+
+\node[red] at (0.5,4.5) {9};
+\node[red] at (1.5,4.5) {9};
+\node[red] at (2.5,4.5) {3};
+\node[red] at (3.5,4.5) {4};
+\node[red] at (4.5,4.5) {5};
+
+\node[red] at (0.5,5.7) {6};
+\node[red] at (1.5,5.7) {0};
+\node[red] at (2.5,5.7) {3};
+\node[red] at (3.5,5.7) {4};
+\node[red] at (4.5,5.7) {5};
+
+\node[red] at (5.7,0.5) {2};
+\node[red] at (5.7,1.5) {7};
+\node[red] at (5.7,2.5) {8};
+\node[red] at (5.7,3.5) {1};
+\node[red] at (5.7,4.5) {9};
+
+\end{scope}
+
+\node[anchor=north] at (1.9125,3) {
+\null\hfill\scalebox{0.6}{
+\parbox{5cm}{\centering
+
+{\setmainfont[Scale=1.8]{Bangers}Across}
+
+\vspace{2mm}
+
+\begin{tabular}{r >{\raggedright}p{3.2cm} r}
+1&An odd number.&(5)\\
+4&A multiple of 10.&(2)\\
+5&A multiple of 11.&(2)\\
+7&All digits even.&(5)\\
+\end{tabular}
+}}\hfill\null};
+
+\node[anchor=north] at (5.3125,3) {
+\null\hfill\scalebox{0.6}{
+\parbox{5cm}{\centering
+
+{\setmainfont[Scale=1.8]{Bangers}Down}
+
+\vspace{2mm}
+
+\begin{tabular}{r >{\raggedright}p{3.7cm} r}
+1&A multiple of 13.&(5)\\
+2&A multiple of 11.&(2)\\
+3&A multiple of 4321.&(5)\\
+6&A multiple of 9.&(2)\\
+\end{tabular}
+}}\hfill\null};
 
 \pagenum{3}
 \end{scope}
 
 %%%%%%%%%%%%%%%%%%%% PAGE FOUR %%%%%%%%%%%%%%%%%%%%
-\begin{scope}[shift={(22.275,21)},rotate=180]
+\begin{scope}[shift={(22.275,21)},rotate=180,transform shape]
+
+\begin{scope}[shift={(-2.1,8.3)}]
+\puzzlebug{r}{(-0.01,-0.02)}{(-0.02,-0.036)}{worried}
+\end{scope}
+
+\draw[line width=1pt,fill=white]
+    (-0.3,8.3) -- (0.5,8.8) [rounded corners=5pt] -- (0.5,10.15)
+    -- (6.9,10.15) -- (6.9,7.35) -- (0.5,7.35) [rounded corners=0pt]
+    -- (0.5,8.52) -- cycle;
+
+
+\node[anchor=north,text width=7cm] at (3.7125,10.08) {
+\null\hfill\scalebox{0.6}{
+\parbox{10.3cm}{\raggedright
+\noindent Write one digit in each white square so that the numbers going across and down
+satisfy the clues. Each digit from 0 to 9 appears exactly twice in the completed grid,
+with every row and every column in the grid containing one digit twice.
+write the digit that appears twice in a row or column in the circle at the end of that row or column.
+once the puzzle is completed, the letters by the circles with 0 to 4 written in them
+will spell a word.
+No number in the completed grid starts with a zero.
+}}\hfill\null};
+
 \pagenum{4}
 \end{scope}
 
@@ -251,10 +379,10 @@ The four letters you write will spell a word.
 \begin{scope}[shift={(-0.3,0.4)}]
 \node[anchor=south,scale=0.6,align=center] at (6.5,8.8) {extra\\letters};
 \node[anchor=east,scale=0.6,align=right,red] at (2.25,8.5) {weight};
-\node[anchor=east,scale=0.6,align=right,red] at (2.25,7.9) {alert};
-\node[anchor=east,scale=0.6,align=right] at (2.25,7.3) {word from\\on both sides};
+\node[anchor=east,scale=0.6,align=right] at (2.25,7.9) {twenty digit\\party slide};
+\node[anchor=east,scale=0.6,align=right] at (2.25,7.3) {on both sides};
 \node[anchor=east,scale=0.6,align=right,red] at (2.25,6.7) {lodge};
-\node[anchor=east,scale=0.6,align=right] at (2.25,6.1) {top row of\\crypturo};
+\node[anchor=east,scale=0.6,align=right] at (2.25,6.1) {evil counts};
 \node[red] at (2.6,6.1) {V};
 \node[red] at (3.2,6.1) {I};
 \node[red] at (3.8,6.1) {O};
@@ -266,6 +394,11 @@ The four letters you write will spell a word.
 \node[red] at (3.2,7.3) {E};
 \node[red] at (3.8,7.3) {D};
 \node[red] at (6.5,7.3) {E};
+\node[red] at (2.6,7.9) {T};
+\node[red] at (3.2,7.9) {E};
+\node[red] at (3.8,7.9) {A};
+\node[red] at (4.4,7.9) {L};
+\node[red] at (6.5,7.9) {R};
 \draw[line width=1pt,line join=round,line cap=round,shift={(2.3,5.8)},scale=0.6]
     (0,4) rectangle +(5,1)
     (1,4) -- +(0,1)
@@ -305,12 +438,12 @@ The four letters you write will spell a word.
 \node[anchor=north,text width=7cm] at (3.7125,4.08) {
 \null\hfill\scalebox{0.6}{
 \parbox{10.3cm}{\raggedright
-\noindent The words that are
+\noindent The words that you found by solving
 {\color{red}???},
-{\color{red}???},
-the answer to on both sides on page 2,
+twenty digit party slide on page 3,
+on both sides on page 2,
 {\color{red}???} and
-in the top row of the solution to evil counts on page 1
+evil counts on page 1
 are all anagrams of themed words with an extra letter added. Write the themed words in the boxes above and the extra letters
 in the boxes to the right. One you have done this, the extra letters will spell another word with the same theme:
 you can use that word as a
