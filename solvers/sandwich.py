@@ -26,7 +26,7 @@ alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 long = english.words(common=False)
 
 for clues in [
-    ["LO", "RO", "ROO"],
+    ["LO", "RO", "NA"],
     ["NT", "RZ", "REGAN"],
     ["THE", "RANGE", "VE"],
     ["UC", "RUN", "ES"]
